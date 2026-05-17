@@ -38,6 +38,11 @@ async function getPlanning(date) {
 
   console.log("📡 Réponse SDIS brute :", res.data);
 return res.data;
+  
+} catch (err) {
+  console.log("❌ ERREUR SDIS APPEL :", err.message);
+  console.log(err.response?.data);
+  return null;
 }
 
 function parsePlanning(text, date) {
