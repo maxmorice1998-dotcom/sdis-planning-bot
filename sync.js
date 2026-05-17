@@ -11,19 +11,27 @@ async function getPlanning(date) {
   console.log("📡 Appel SDIS...");
 
   const res = await axios.post(
-    SDIS_URL,
-    new URLSearchParams({
-      a: "infobulleOccupations",
-      idPersonnel: "3873",
-      date: date,
-    }),
-    {
-      headers: {
-        Cookie: COOKIE,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    }
-  );
+  SDIS_URL,
+  new URLSearchParams({
+    a: "infobulleOccupations",
+    idPersonnel: "3873",
+    date: date,
+  }),
+  {
+    headers: {
+      Cookie: COOKIE,
+      "Content-Type": "application/x-www-form-urlencoded",
+      "User-Agent": "Mozilla/5.0",
+      "Accept": "*/*"
+    },
+    maxRedirects: 0,
+    validateStatus: () => true
+  }
+);
+
+console.log("📡 STATUS :", res.status);
+console.log("📡 HEADERS :", res.headers);
+console.log("📡 DATA :", res.data);
 
   console.log("📡 Réponse SDIS :");
   console.log(res.data);
