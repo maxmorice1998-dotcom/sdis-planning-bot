@@ -36,7 +36,8 @@ async function getPlanning(date) {
     }
   );
 
-  return res.data;
+  console.log("📡 Réponse SDIS brute :", res.data);
+return res.data;
 }
 
 function parsePlanning(text, date) {
