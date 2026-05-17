@@ -21,28 +21,38 @@ oauth2Client.setCredentials({
 const calendar = google.calendar({ version: "v3", auth: oauth2Client });
 
 async function getPlanning(date) {
-  const res = await axios.post(
-    SDIS_URL,
-    new URLSearchParams({
-      a: "infobulleOccupations",
-      idPersonnel: "3873",
-      date: date,
-    }),
-    {
-      headers: {
-        Cookie: COOKIE,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    }
-  );
+  console.log("📡 Appel SDIS...");
 
-  console.log("📡 Réponse SDIS brute :", res.data);
-return res.data;
-  
-} catch (err) {
-  console.log("❌ ERREUR SDIS APPEL :", err.message);
-  console.log(err.response?.data);
-  return null;
+  try {
+    const res = await axios.post(
+      SDIS_URL,
+      new URLSearchParams({
+        a: "infobulleOccupations",
+        idPersonnel: "3873",
+        date: date,
+      }),
+      {
+        headers: {
+          Cookie: COOKIE,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    console.log("📡 Réponse SDIS :");
+    console.log(res.data);
+
+    return res.data;
+
+  } catch (err) {
+    console.log("❌ ERREUR SDIS :", err.message);
+
+    if (err.response) {
+      console.log("📄 Réponse erreur :", err.response.data);
+    }
+
+    return null;
+  }
 }
 
 function parsePlanning(text, date) {
