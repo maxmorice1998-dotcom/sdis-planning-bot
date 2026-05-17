@@ -10,34 +10,33 @@ const COOKIE = process.env.SDIS_COOKIE;
 async function getPlanning(date) {
   console.log("📡 Appel SDIS...");
 
-  const res = await axios.post(
-  SDIS_URL,
-  new URLSearchParams({
+  console.log("📡 START REQUEST SDIS");
+
+const res = await axios({
+  method: "POST",
+  url: SDIS_URL,
+  data: new URLSearchParams({
     a: "infobulleOccupations",
     idPersonnel: "3873",
     date: date,
-  }),
-  {
-    headers: {
-      Cookie: COOKIE,
-      "Content-Type": "application/x-www-form-urlencoded",
-      "User-Agent": "Mozilla/5.0",
-      "Accept": "*/*"
-    },
-    maxRedirects: 0,
-    validateStatus: () => true
-  }
-);
+  }).toString(),
+  headers: {
+    Cookie: COOKIE,
+    "Content-Type": "application/x-www-form-urlencoded",
+    "User-Agent": "Mozilla/5.0",
+    "Accept": "*/*",
+  },
+  maxRedirects: 0,
+  validateStatus: null,
+  timeout: 10000
+});
 
 console.log("📡 STATUS :", res.status);
-console.log("📡 HEADERS :", JSON.stringify(res.headers, null, 2));
-console.log("📡 DATA :", res.data);
-
-
-  console.log("📡 Réponse SDIS :");
-  console.log(res.data);
-
-  return res.data;
+console.log("📡 HEADERS :", res.headers);
+console.log("📡 DATA TYPE :", typeof res.data);
+console.log("📡 DATA LENGTH :", res.data?.length);
+console.log("📡 DATA RAW :");
+console.log(res.data);
 }
 
 async function main() {
