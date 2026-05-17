@@ -30,8 +30,9 @@ async function getPlanning(date) {
 );
 
 console.log("📡 STATUS :", res.status);
-console.log("📡 HEADERS :", res.headers);
+console.log("📡 HEADERS :", JSON.stringify(res.headers, null, 2));
 console.log("📡 DATA :", res.data);
+
 
   console.log("📡 Réponse SDIS :");
   console.log(res.data);
