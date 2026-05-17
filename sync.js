@@ -1,3 +1,23 @@
+const res = await axios.post(
+  SDIS_URL,
+  new URLSearchParams({
+    a: "infobulleOccupations",
+    idPersonnel: "3873",
+    date: date,
+  }),
+  {
+    headers: {
+      Cookie: COOKIE,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    maxRedirects: 0,
+    validateStatus: () => true
+  }
+);
+
+console.log("📡 STATUS :", res.status);
+console.log("📡 HEADERS :", res.headers);
+console.log("📡 DATA :", res.data);
 const axios = require("axios");
 const { google } = require("googleapis");
 console.log("🚀 Bot SDIS démarré");
