@@ -1,3 +1,8 @@
+const axios = require("axios");
+const { google } = require("googleapis");
+
+console.log("🚀 Bot SDIS démarré");
+console.log("COOKIE présent ?", !!process.env.SDIS_COOKIE);
 const res = await axios.post(
   SDIS_URL,
   new URLSearchParams({
@@ -18,10 +23,6 @@ const res = await axios.post(
 console.log("📡 STATUS :", res.status);
 console.log("📡 HEADERS :", res.headers);
 console.log("📡 DATA :", res.data);
-const axios = require("axios");
-const { google } = require("googleapis");
-console.log("🚀 Bot SDIS démarré");
-console.log("COOKIE présent ?", !!process.env.SDIS_COOKIE);
 const SDIS_URL = "https://agatt.sdis14.fr/ajax/index.php";
 
 // ⚠️ récupéré depuis GitHub Secrets
